@@ -15,10 +15,10 @@ model:
   pool: add
   residual: True
   use_de_max: False
-  use_de_mean: False
-  use_distance_encoding: False
+  use_de_mean: True
+  use_distance_encoding: True
   use_normal_gnn: False
-  use_page_rank: True
+  use_page_rank: False
   virtual_node: False
 num_workers: 8
 sampling:
@@ -47,6 +47,6 @@ train:
   wd: 0.0
 version: final
 --------------------------------------------------
-Time: 2023/01/08 - 07:31
+Time: 2023/01/08 - 08:20
 T[-1] GNN[GCNConv] L[6] Mini[1] Emb[(0, 1, 2)-concat-1] H[128] HopsEmb[16] Pool[add] VN[False] WithOri[False] Hops[3] WalkL[0] p[1.0] q[1.0] Smp[None] MR[0] Reg[0.0-0.0] Seed[None] GPU[0]
-Epoch: 001, Train Loss: 0.6410, Val: -2.4039, Test: -2.4190, Seconds: 73.9840, Memory Peak: 1184 MB allocated, 1380 MB reserved.
+Epoch: 001, Train Loss: 0.6283, Val: -0.5461, Test: -0.6015, Seconds: 113.9862, Memory Peak: 1174 MB allocated, 1280 MB reserved.
