@@ -31,7 +31,7 @@ def set_cfg(cfg):
     # Maximal number of epochs
     cfg.train.epochs = 100
     # Number of runs with random init 
-    cfg.train.runs = 3
+    cfg.train.runs = 1
     # Base learning rate
     cfg.train.lr = 0.001
     # number of steps before reduce learning rate
@@ -71,6 +71,10 @@ def set_cfg(cfg):
     cfg.model.mlp_layers = 1
     # Whether combine with normal gnn, only used for random walk based subgraph which doesn't cover whole 1st hop
     cfg.model.use_normal_gnn = False
+    cfg.model.use_page_rank = False
+    cfg.model.use_distance_encoding = False
+    cfg.model.use_de_mean = False
+    cfg.model.use_de_max = False
 
 
     # ------------------------------------------------------------------------ #

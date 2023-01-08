@@ -1,11 +1,18 @@
 import torch
+import random
+from random import sample
+import dgl
+import networkx as nx
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_scatter import scatter
 import core.model_utils.pyg_gnn_wrapper as gnn_wrapper 
 from core.model_utils.elements import MLP, DiscreteEncoder, Identity, VNUpdate
 from core.model_utils.ppgn import PPGN
+from core.graphcnn import GraphCNN
 from torch_geometric.nn.inits import reset
+from functools import reduce
+import operator
 
 BN = True
 
@@ -176,6 +183,10 @@ class GNNAsKernel(nn.Module):
     def __init__(self, nfeat_node, nfeat_edge, nhid, nout, nlayer_outer, nlayer_inner, gnn_types, 
                         dropout=0, 
                         hop_dim=0, 
+                        use_page_rank=False,
+                        use_distance_encoding=False,
+                        use_de_mean=False,
+                        use_de_max=False,
                         node_embedding=False, 
                         use_normal_gnn=False, 
                         bn=BN, 
@@ -196,6 +207,10 @@ class GNNAsKernel(nn.Module):
             nlayer_outer = 1
 
         # nfeat_in is None: discrete input features
+        self.use_page_rank = use_page_rank
+        self.use_distance_encoding = use_distance_encoding
+        self.use_de_mean = use_de_mean
+        self.use_de_max = use_de_max
         self.input_encoder = DiscreteEncoder(nhid) if nfeat_node is None else MLP(nfeat_node, nhid, 1)
         # layers
         edge_emd_dim = nhid if nlayer_inner == 0 else nhid + hop_dim 
@@ -255,6 +270,83 @@ class GNNAsKernel(nn.Module):
     def forward(self, data):
         x = data.x if len(data.x.shape) <= 2 else data.x.squeeze(-1)
         x = self.input_encoder(x)
+
+        # use page-rank as global topology feature
+        if (self.use_page_rank):
+            N = data.x.shape[0]
+
+            # set hyper params 
+            K = 10
+            DAMP = 0.85
+            SAMPLE_NUM = 100
+
+            # build dgl graph from input
+            g = dgl.DGLGraph()
+            g.add_nodes(N)
+            g.add_edges(data.edge_index[0].tolist(), data.edge_index[1].tolist()) 
+            g.ndata["pagerank"] = torch.ones(N)/N
+            g.ndata["degree"] = g.out_degrees(g.nodes()).float()
+            
+            def pagerankMessageFunc(edges):
+                return {"pv" :edges.src["pagerank"]/edges.src["degree"]}
+            
+            def pagerankReduceFunc(nodes):
+                msgs=torch.sum(nodes.mailbox["pv"],dim=1)
+                pv=(1-DAMP)/N+msgs*DAMP
+                return {"pv":pv}
+            
+            g.register_message_func(pagerankMessageFunc)
+            g.register_reduce_func(pagerankReduceFunc)
+            
+            def  pagerankIteration(g):
+                # because the page rank is an iterative algorithm and takes much time
+                # we use a sample method to accelerate the process
+                rl = []
+                for i in range(SAMPLE_NUM):
+                    rl.append(random.randint(0,len(g.edges[0])))
+                for r in rl:
+                    g.send((g.edges()[0][r],g.edges()[1][r]))
+                for v in g.nodes():
+                    g.recv(v)
+            
+            # calculate pagerank value
+            pagerankIteration(g)
+
+            # merge global topolpgy feature and node feature
+            x = x + g.ndata["pagerank"].to('cuda').view(-1, 1)
+
+        # use distance encoding as global topology feature
+        # we use two different DE method:
+        # 1. MEAN: mean value of the shortest path distance (SPD) for the target node
+        # 2. MAX: max value of the shortest path distance (SPD) for the target node
+        elif (self.use_distance_encoding):
+            alpha = 0.01
+            g = nx.Graph()
+            node_num = data.x.shape[0]
+            # build graph using networkx
+            _edges = list(zip(data.edge_index[0].tolist(), data.edge_index[1].tolist()))
+            g.add_nodes_from(range(node_num))
+            g.add_edges_from(_edges)
+            # get a dict of the SPD
+            de = dict(nx.all_pairs_shortest_path_length(g))
+            de_dests = [list(i.keys()) for i in list(de.values())]
+            de_vals = [list(i.values()) for i in list(de.values())]
+            de_lens = [len(j) for j in de_dests]
+            de_starts = [[list(de.keys())[k]]*de_lens[k] for k in range(len(de))]
+            # build a embedding tensor from the SPD dict
+            i = torch.LongTensor([reduce(operator.concat, de_starts), reduce(operator.concat, de_dests)])
+            v = torch.LongTensor(reduce(operator.concat, de_vals))
+            _de_embeddings = torch.sparse.FloatTensor(i, v, torch.Size([node_num, node_num])).to_dense().float()
+            if (self.use_de_mean):
+                # use MEAN method
+                de_embeddings = _de_embeddings.mean(dim=-1)
+            elif (self.use_de_max):
+                # use MAX method
+                de_embeddings = _de_embeddings.max(dim=-1).values*alpha
+            
+            # merge global topolpgy feature and node feature
+            x = x + de_embeddings.to('cuda').view(-1, 1)
+
         ori_edge_attr = data.edge_attr 
         if ori_edge_attr is None:
             ori_edge_attr = data.edge_index.new_zeros(data.edge_index.size(-1))

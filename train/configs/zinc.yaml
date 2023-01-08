@@ -5,10 +5,14 @@ model:
   embs: (0, 1, 2)
   embs_combine_mode: 'concat'
   pool: add
+  use_page_rank: False
+  use_distance_encoding: False
+  use_de_mean: False
+  use_de_max: False
 subgraph:
   hops: 3
   online: True
 train:
-  epochs: 310
+  epochs: 200
 
 

@@ -1,0 +1,149 @@
+--------------------------------------------------
+dataset: ZINC
+device: 0
+downsample: False
+handtune: 
+model:
+  embs: (0, 1, 2)
+  embs_combine_mode: concat
+  gnn_type: GCNConv
+  hidden_size: 128
+  hops_dim: 16
+  mini_layers: 2
+  mlp_layers: 1
+  num_layers: 6
+  pool: add
+  residual: True
+  use_normal_gnn: False
+  virtual_node: False
+num_workers: 8
+sampling:
+  batch_factor: 1
+  mode: None
+  random_rate: 0.5
+  redundancy: 0
+  stride: 2
+seed: None
+subgraph:
+  hops: 3
+  online: True
+  walk_length: 0
+  walk_p: 1.0
+  walk_q: 1.0
+  walk_repeat: 5
+task: -1
+train:
+  batch_size: 128
+  dropout: 0.0
+  epochs: 100
+  lr: 0.001
+  lr_decay: 0.5
+  lr_patience: 50
+  runs: 1
+  wd: 0.0
+version: final
+--------------------------------------------------
+Time: 2022/12/04 - 16:21
+T[-1] GNN[GCNConv] L[6] Mini[2] Emb[(0, 1, 2)-concat-1] H[128] HopsEmb[16] Pool[add] VN[False] WithOri[False] Hops[3] WalkL[0] p[1.0] q[1.0] Smp[None] MR[0] Reg[0.0-0.0] Seed[None] GPU[0]
+Epoch: 001, Train Loss: 0.6247, Val: -0.7989, Test: -0.8467, Seconds: 11.0530, Memory Peak: 1471 MB allocated, 1718 MB reserved.
+Epoch: 002, Train Loss: 0.4794, Val: -0.5024, Test: -0.4886, Seconds: 10.4125, Memory Peak: 1476 MB allocated, 1718 MB reserved.
+Epoch: 003, Train Loss: 0.4090, Val: -0.5562, Test: -0.4886, Seconds: 9.5969, Memory Peak: 1476 MB allocated, 1718 MB reserved.
+Epoch: 004, Train Loss: 0.3740, Val: -0.4246, Test: -0.3985, Seconds: 10.5301, Memory Peak: 1476 MB allocated, 1718 MB reserved.
+Epoch: 005, Train Loss: 0.3505, Val: -0.4421, Test: -0.3985, Seconds: 9.6907, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 006, Train Loss: 0.3463, Val: -0.4456, Test: -0.3985, Seconds: 9.6257, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 007, Train Loss: 0.3408, Val: -0.4052, Test: -0.3804, Seconds: 10.7234, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 008, Train Loss: 0.3169, Val: -0.5696, Test: -0.3804, Seconds: 9.7703, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 009, Train Loss: 0.3201, Val: -0.3197, Test: -0.2868, Seconds: 10.4655, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 010, Train Loss: 0.3019, Val: -0.9240, Test: -0.2868, Seconds: 9.5144, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 011, Train Loss: 0.2981, Val: -0.3496, Test: -0.2868, Seconds: 9.5330, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 012, Train Loss: 0.2861, Val: -0.3952, Test: -0.2868, Seconds: 9.6272, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 013, Train Loss: 0.2943, Val: -0.4326, Test: -0.2868, Seconds: 9.5289, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 014, Train Loss: 0.2793, Val: -0.3967, Test: -0.2868, Seconds: 9.8221, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 015, Train Loss: 0.2787, Val: -0.3988, Test: -0.2868, Seconds: 9.4972, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 016, Train Loss: 0.2791, Val: -0.2881, Test: -0.2584, Seconds: 10.4966, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 017, Train Loss: 0.2634, Val: -0.3947, Test: -0.2584, Seconds: 9.7301, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 018, Train Loss: 0.2785, Val: -1.1041, Test: -0.2584, Seconds: 9.5327, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 019, Train Loss: 0.2563, Val: -0.2599, Test: -0.2246, Seconds: 10.4184, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 020, Train Loss: 0.2507, Val: -0.2628, Test: -0.2246, Seconds: 9.5564, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 021, Train Loss: 0.2493, Val: -0.2507, Test: -0.2120, Seconds: 10.4349, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 022, Train Loss: 0.2383, Val: -0.3088, Test: -0.2120, Seconds: 9.4732, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 023, Train Loss: 0.2598, Val: -0.2483, Test: -0.2138, Seconds: 10.5058, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 024, Train Loss: 0.2528, Val: -0.2523, Test: -0.2138, Seconds: 9.6673, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 025, Train Loss: 0.2341, Val: -0.2535, Test: -0.2138, Seconds: 9.6165, Memory Peak: 1478 MB allocated, 1750 MB reserved.
+Epoch: 026, Train Loss: 0.2373, Val: -0.3104, Test: -0.2138, Seconds: 9.6643, Memory Peak: 1478 MB allocated, 1754 MB reserved.
+Epoch: 027, Train Loss: 0.2404, Val: -0.2589, Test: -0.2138, Seconds: 9.5803, Memory Peak: 1478 MB allocated, 1754 MB reserved.
+Epoch: 028, Train Loss: 0.2332, Val: -0.3230, Test: -0.2138, Seconds: 9.6677, Memory Peak: 1478 MB allocated, 1754 MB reserved.
+Epoch: 029, Train Loss: 0.2377, Val: -0.4140, Test: -0.2138, Seconds: 9.5416, Memory Peak: 1478 MB allocated, 1754 MB reserved.
+Epoch: 030, Train Loss: 0.2495, Val: -0.4069, Test: -0.2138, Seconds: 9.5439, Memory Peak: 1478 MB allocated, 1754 MB reserved.
+Epoch: 031, Train Loss: 0.2410, Val: -0.2844, Test: -0.2138, Seconds: 9.6272, Memory Peak: 1478 MB allocated, 1754 MB reserved.
+Epoch: 032, Train Loss: 0.2265, Val: -0.2591, Test: -0.2138, Seconds: 9.5972, Memory Peak: 1480 MB allocated, 1758 MB reserved.
+Epoch: 033, Train Loss: 0.2211, Val: -0.2099, Test: -0.1934, Seconds: 10.4583, Memory Peak: 1480 MB allocated, 1758 MB reserved.
+Epoch: 034, Train Loss: 0.2191, Val: -0.2845, Test: -0.1934, Seconds: 9.5412, Memory Peak: 1480 MB allocated, 1758 MB reserved.
+Epoch: 035, Train Loss: 0.2194, Val: -0.2777, Test: -0.1934, Seconds: 9.5561, Memory Peak: 1480 MB allocated, 1758 MB reserved.
+Epoch: 036, Train Loss: 0.2293, Val: -0.4196, Test: -0.1934, Seconds: 9.6303, Memory Peak: 1480 MB allocated, 1758 MB reserved.
+Epoch: 037, Train Loss: 0.2319, Val: -0.3009, Test: -0.1934, Seconds: 9.7221, Memory Peak: 1480 MB allocated, 1758 MB reserved.
+Epoch: 038, Train Loss: 0.2145, Val: -0.2282, Test: -0.1934, Seconds: 9.6144, Memory Peak: 1480 MB allocated, 1768 MB reserved.
+Epoch: 039, Train Loss: 0.2223, Val: -0.3002, Test: -0.1934, Seconds: 9.6700, Memory Peak: 1480 MB allocated, 1768 MB reserved.
+Epoch: 040, Train Loss: 0.2256, Val: -0.2090, Test: -0.1759, Seconds: 10.4778, Memory Peak: 1480 MB allocated, 1768 MB reserved.
+Epoch: 041, Train Loss: 0.2066, Val: -0.2262, Test: -0.1759, Seconds: 9.5384, Memory Peak: 1480 MB allocated, 1768 MB reserved.
+Epoch: 042, Train Loss: 0.2115, Val: -0.2502, Test: -0.1759, Seconds: 9.4615, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 043, Train Loss: 0.2008, Val: -0.2768, Test: -0.1759, Seconds: 9.6138, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 044, Train Loss: 0.1933, Val: -0.2054, Test: -0.1758, Seconds: 10.5588, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 045, Train Loss: 0.1894, Val: -0.2069, Test: -0.1758, Seconds: 9.6731, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 046, Train Loss: 0.1934, Val: -0.3001, Test: -0.1758, Seconds: 9.5164, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 047, Train Loss: 0.2446, Val: -0.3001, Test: -0.1758, Seconds: 9.5007, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 048, Train Loss: 0.2152, Val: -0.2233, Test: -0.1758, Seconds: 9.3758, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 049, Train Loss: 0.2044, Val: -0.1963, Test: -0.1676, Seconds: 10.4947, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 050, Train Loss: 0.2089, Val: -0.2949, Test: -0.1676, Seconds: 9.6135, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 051, Train Loss: 0.1758, Val: -0.2091, Test: -0.1676, Seconds: 9.5190, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 052, Train Loss: 0.1835, Val: -0.2110, Test: -0.1676, Seconds: 9.6001, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 053, Train Loss: 0.1804, Val: -0.2360, Test: -0.1676, Seconds: 9.8392, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 054, Train Loss: 0.1734, Val: -0.1815, Test: -0.1504, Seconds: 10.5656, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 055, Train Loss: 0.1756, Val: -0.1933, Test: -0.1504, Seconds: 9.6245, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 056, Train Loss: 0.1707, Val: -0.1840, Test: -0.1504, Seconds: 9.5167, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 057, Train Loss: 0.1800, Val: -0.2247, Test: -0.1504, Seconds: 9.5487, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 058, Train Loss: 0.1717, Val: -0.2118, Test: -0.1504, Seconds: 9.5854, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 059, Train Loss: 0.1628, Val: -0.1824, Test: -0.1504, Seconds: 9.6212, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 060, Train Loss: 0.1620, Val: -0.1726, Test: -0.1452, Seconds: 10.5526, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 061, Train Loss: 0.1693, Val: -0.2086, Test: -0.1452, Seconds: 9.5978, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 062, Train Loss: 0.1577, Val: -0.1854, Test: -0.1452, Seconds: 9.5761, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 063, Train Loss: 0.1638, Val: -0.1821, Test: -0.1452, Seconds: 9.7979, Memory Peak: 1481 MB allocated, 1768 MB reserved.
+Epoch: 064, Train Loss: 0.1661, Val: -0.1977, Test: -0.1452, Seconds: 9.6787, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 065, Train Loss: 0.1660, Val: -0.1683, Test: -0.1366, Seconds: 10.4767, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 066, Train Loss: 0.1591, Val: -0.2672, Test: -0.1366, Seconds: 9.6427, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 067, Train Loss: 0.1580, Val: -0.1748, Test: -0.1366, Seconds: 9.5508, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 068, Train Loss: 0.1649, Val: -0.2274, Test: -0.1366, Seconds: 9.5022, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 069, Train Loss: 0.1591, Val: -0.2108, Test: -0.1366, Seconds: 9.4573, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 070, Train Loss: 0.1641, Val: -0.2103, Test: -0.1366, Seconds: 9.6157, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 071, Train Loss: 0.1670, Val: -0.1846, Test: -0.1366, Seconds: 9.4953, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 072, Train Loss: 0.1572, Val: -0.2037, Test: -0.1366, Seconds: 9.6256, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 073, Train Loss: 0.1684, Val: -0.2377, Test: -0.1366, Seconds: 9.5500, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 074, Train Loss: 0.1779, Val: -0.2049, Test: -0.1366, Seconds: 9.5416, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 075, Train Loss: 0.1610, Val: -0.1803, Test: -0.1366, Seconds: 9.5831, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 076, Train Loss: 0.1580, Val: -0.1974, Test: -0.1366, Seconds: 9.4927, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 077, Train Loss: 0.1533, Val: -0.1755, Test: -0.1366, Seconds: 9.6064, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 078, Train Loss: 0.1416, Val: -0.1846, Test: -0.1366, Seconds: 9.5512, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 079, Train Loss: 0.1486, Val: -0.1883, Test: -0.1366, Seconds: 9.4756, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 080, Train Loss: 0.1472, Val: -0.2440, Test: -0.1366, Seconds: 9.4809, Memory Peak: 1491 MB allocated, 1768 MB reserved.
+Epoch: 081, Train Loss: 0.1432, Val: -0.2351, Test: -0.1366, Seconds: 9.4874, Memory Peak: 1492 MB allocated, 1768 MB reserved.
+Epoch: 082, Train Loss: 0.1496, Val: -0.2355, Test: -0.1366, Seconds: 9.5780, Memory Peak: 1492 MB allocated, 1768 MB reserved.
+Epoch: 083, Train Loss: 0.1464, Val: -0.1906, Test: -0.1366, Seconds: 9.4794, Memory Peak: 1492 MB allocated, 1810 MB reserved.
+Epoch: 084, Train Loss: 0.1466, Val: -0.2259, Test: -0.1366, Seconds: 9.5452, Memory Peak: 1492 MB allocated, 1810 MB reserved.
+Epoch: 085, Train Loss: 0.1490, Val: -0.1847, Test: -0.1366, Seconds: 9.4907, Memory Peak: 1492 MB allocated, 1812 MB reserved.
+Epoch: 086, Train Loss: 0.1412, Val: -0.2610, Test: -0.1366, Seconds: 9.6930, Memory Peak: 1492 MB allocated, 1812 MB reserved.
+Epoch: 087, Train Loss: 0.1483, Val: -0.1774, Test: -0.1366, Seconds: 9.7544, Memory Peak: 1492 MB allocated, 1812 MB reserved.
+Epoch: 088, Train Loss: 0.1426, Val: -0.2057, Test: -0.1366, Seconds: 9.4664, Memory Peak: 1492 MB allocated, 1812 MB reserved.
+Epoch: 089, Train Loss: 0.1375, Val: -0.1840, Test: -0.1366, Seconds: 9.4789, Memory Peak: 1492 MB allocated, 1812 MB reserved.
+Epoch: 090, Train Loss: 0.1394, Val: -0.1766, Test: -0.1366, Seconds: 9.5493, Memory Peak: 1492 MB allocated, 1812 MB reserved.
+Epoch: 091, Train Loss: 0.1397, Val: -0.2208, Test: -0.1366, Seconds: 9.6518, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 092, Train Loss: 0.1426, Val: -0.2327, Test: -0.1366, Seconds: 9.6093, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 093, Train Loss: 0.1388, Val: -0.2434, Test: -0.1366, Seconds: 9.5542, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 094, Train Loss: 0.1417, Val: -0.1579, Test: -0.1380, Seconds: 10.6178, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 095, Train Loss: 0.1371, Val: -0.1934, Test: -0.1380, Seconds: 9.5761, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 096, Train Loss: 0.1353, Val: -0.1743, Test: -0.1380, Seconds: 9.6435, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 097, Train Loss: 0.1412, Val: -0.1766, Test: -0.1380, Seconds: 9.7322, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 098, Train Loss: 0.1314, Val: -0.1863, Test: -0.1380, Seconds: 9.6683, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 099, Train Loss: 0.1321, Val: -0.1837, Test: -0.1380, Seconds: 9.5755, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Epoch: 100, Train Loss: 0.1296, Val: -0.2271, Test: -0.1380, Seconds: 9.6109, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Run 1, Vali: -0.15788694190979005, Test: -0.13799210929870606, Seconds/epoch: 9.766408059597016, Memory Peak: 1497 MB allocated, 1938 MB reserved.
+Final Vali: -0.1579 ± nan, Final Test: -0.1380 ± nan,Seconds/epoch: 9.766408059597016, Memory Peak: 1497 MB allocated, 1938 MB reserved.
